@@ -474,11 +474,14 @@ class Form extends PureComponent {
     const fnCell = this.Entry(designMode)
 
     return (
-      <div>
+      <form>
         {[chckPanelCells(), designMode && btnPanelCells(), tA].map(
           (e, i) => e && formTable(e, i === 2 && fnCell),
         )}
-      </div>
+        <button type="submit" className="btn btn-primary">
+          Confirm identity
+        </button>
+      </form>
     )
   }
 }
