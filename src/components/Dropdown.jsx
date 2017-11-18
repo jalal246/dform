@@ -9,19 +9,21 @@ class Dropdown extends PureComponent {
     onChange: PropTypes.func.isRequired,
     data: PropTypes.arrayOf(PropTypes.string).isRequired,
     selected: PropTypes.string.isRequired,
-    rw: PropTypes.number.isRequired,
-    clm: PropTypes.number.isRequired,
+    name: PropTypes.string,
+    dataOpt: PropTypes.string,
     disabled: PropTypes.bool,
+  }
+  static defaultProps = {
+    disabled: false,
+    name: null,
+    dataOpt: null,
   }
   constructor(props) {
     super(props)
-    /**
-     * bind handlers
-     */
-    this.onChange = this.onChange.bind(this)
     this.state = {
       selected: this.props.selected,
     }
+    this.onChange = this.onChange.bind(this)
     /**
      * define uuid as key
      */
@@ -34,15 +36,15 @@ class Dropdown extends PureComponent {
   }
 
   render() {
-    const { data, disabled, rw, clm } = this.props
+    const { data, disabled, name, dataOpt } = this.props
     const { selected } = this.state
     return (
       <select
         onChange={this.onChange}
         value={selected}
         disabled={disabled}
-        data-rw={rw}
-        data-clm={clm}
+        name={name}
+        data-opt={dataOpt}
       >
         {data.map(e => (
           <option value={e} key={this.key()}>
