@@ -9,10 +9,11 @@ class EditLable extends PureComponent {
     designMode: PropTypes.bool.isRequired,
     value: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    rw: PropTypes.number.isRequired,
-    clm: PropTypes.number.isRequired,
+    dataOpt: PropTypes.string,
   }
-
+  static defaultProps = {
+    dataOpt: 'grid',
+  }
   constructor(props) {
     super(props)
     this.state = {
@@ -64,7 +65,7 @@ class EditLable extends PureComponent {
   }
 
   render() {
-    const { designMode, name, rw, clm } = this.props
+    const { designMode, name, dataOpt } = this.props
 
     const { isEditing, tempVal } = this.state
 
@@ -76,9 +77,8 @@ class EditLable extends PureComponent {
         onBlur={this.onBlur}
         onKeyPress={this.onKeyPress}
         ref={input => input && input.focus()}
-        name={name || 'grid'}
-        data-rw={rw}
-        data-clm={clm}
+        name={name}
+        data-opt={dataOpt}
       />
     ) : (
       <div
