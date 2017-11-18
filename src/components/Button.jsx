@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Button = ({ type, disabled, name, dataOpt, txt, onClick }) => (
+const Button = ({ type, disabled, name, dataOpt, text, onClick }) => (
   <button
     type={type}
     disabled={disabled}
@@ -9,7 +9,7 @@ const Button = ({ type, disabled, name, dataOpt, txt, onClick }) => (
     name={name}
     data-opt={dataOpt}
   >
-    {txt}
+    {text}
   </button>
 )
 
@@ -19,7 +19,7 @@ Button.propTypes = {
   onClick: PropTypes.func.isRequired,
   name: PropTypes.string,
   dataOpt: PropTypes.string,
-  txt: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
 }
 Button.defaultProps = {
   type: 'button',
