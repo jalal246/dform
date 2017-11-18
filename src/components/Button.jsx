@@ -5,8 +5,8 @@ class Button extends PureComponent {
   static propTypes = {
     type: PropTypes.string,
     disabled: PropTypes.bool,
-    name: PropTypes.string,
     onClick: PropTypes.func.isRequired,
+    name: PropTypes.string,
     dataOpt: PropTypes.string,
     txt: PropTypes.string.isRequired,
   }
@@ -22,8 +22,8 @@ class Button extends PureComponent {
       <button
         type={type}
         disabled={disabled}
-        name={name}
         onClick={onClick}
+        name={name}
         data-opt={dataOpt}
       >
         {txt}

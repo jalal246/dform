@@ -1,18 +1,21 @@
-/* eslint react/require-default-props: 0 */
-
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 class Checkbox extends PureComponent {
   static propTypes = {
-    onChange: PropTypes.func.isRequired,
     id: PropTypes.string,
     checked: PropTypes.bool,
-    txt: PropTypes.string,
-    rw: PropTypes.number.isRequired,
-    clm: PropTypes.number.isRequired,
+    onChange: PropTypes.func.isRequired,
+    name: PropTypes.string,
+    dataOpt: PropTypes.string,
+    txt: PropTypes.string.isRequired,
   }
-
+  static defaultProps = {
+    id: null,
+    checked: false,
+    name: null,
+    dataOpt: null,
+  }
   constructor(props) {
     super(props)
     this.state = { isChecked: this.props.checked || false }
@@ -25,7 +28,7 @@ class Checkbox extends PureComponent {
   }
 
   render() {
-    const { txt, id, rw, clm } = this.props
+    const { txt, id, name, dataOpt } = this.props
     const { isChecked } = this.state
     return (
       <div role="presentation">
@@ -35,8 +38,8 @@ class Checkbox extends PureComponent {
           checked={isChecked}
           id={id}
           onChange={this.onChange}
-          data-rw={rw}
-          data-clm={clm}
+          name={name}
+          data-opt={dataOpt}
         />
         {txt && <label htmlFor={id}>{txt}</label>}
       </div>
