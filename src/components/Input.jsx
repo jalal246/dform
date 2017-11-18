@@ -1,4 +1,3 @@
-/* eslint react/require-default-props: 0 */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
@@ -6,19 +5,25 @@ class Input extends PureComponent {
   static propTypes = {
     onBlur: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    id: PropTypes.string,
+    dataOpt: PropTypes.string,
     type: PropTypes.string,
-    rw: PropTypes.number.isRequired,
-    clm: PropTypes.number.isRequired,
+  }
+  static defaultProps = {
+    type: 'text',
+    name: null,
+    dataOpt: null,
+    id: null,
   }
   constructor(props) {
     super(props)
     this.state = {
       tempVal: this.props.value,
-      type: this.props.type || 'text', // designMode value
+      type: this.props.type,
     }
-    ;[('handler', 'onChange')].forEach(fn => {
-      this[fn] = this[fn].bind(this)
-    })
+    this.onChange = this.onChange.bind(this)
+    this.handler = this.handler.bind(this)
   }
 
   /**
@@ -51,18 +56,19 @@ class Input extends PureComponent {
   }
 
   render() {
-    const { rw, clm } = this.props
+    const { id, name, dataOpt } = this.props
     const { tempVal, type } = this.state
     return (
       <input
         type={type}
         value={tempVal}
+        id={id}
         onChange={this.onChange}
         onBlur={this.handler}
         onClick={this.handler}
         onKeyPress={this.handler}
-        data-rw={rw}
-        data-clm={clm}
+        name={name}
+        data-opt={dataOpt}
       />
     )
   }
