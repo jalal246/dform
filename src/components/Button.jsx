@@ -14,7 +14,7 @@ class Button extends PureComponent {
     type: 'button',
     disabled: false,
     name: 'btn',
-    dataOpt: 'btn',
+    dataOpt: null,
   }
   render() {
     const { type, disabled, name, dataOpt, txt, onClick } = this.props
