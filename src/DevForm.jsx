@@ -57,17 +57,19 @@ class Form extends PureComponent {
 
   // input event handler
   onBlur(e) {
-    const { rw, cl, value } = this.gtVals(e)
-    // if designMode then it's comming from EditLable
-    this.setState(ps => ({
-      tA: deepSlice.cell(
-        ps.tA,
-        rw,
-        cl,
-        ps.designMode ? { lable: value } : { value },
-        '',
-      ),
-    }))
+    if (this.gtName(e) === 'grid') {
+      const { rw, cl, value } = this.gtVals(e)
+      // if designMode then it's comming from EditLable
+      this.setState(ps => ({
+        tA: deepSlice.cell(
+          ps.tA,
+          rw,
+          cl,
+          ps.designMode ? { lable: value } : { value },
+          '',
+        ),
+      }))
+    }
   }
 
   // change event handler for checkbox and dropdown
@@ -290,6 +292,7 @@ class Form extends PureComponent {
    */
   gtRw = e => get.eai(e, DATA_ATTR.RW) // data-rw
   gtCl = e => get.eai(e, DATA_ATTR.CLM) // data-cl
+  gtName = e => get.en(e)
 
   /**
    * get values used to in event handler to update tA
@@ -475,12 +478,23 @@ class Form extends PureComponent {
 
     return (
       <form>
-        {[chckPanelCells(), designMode && btnPanelCells(), tA].map(
-          (e, i) => e && formTable(e, i === 2 && fnCell),
-        )}
-        <button type="submit" className="btn btn-primary">
-          Confirm identity
-        </button>
+        {[
+          chckPanelCells(),
+          designMode && btnPanelCells(),
+          <EditLable
+            value="title"
+            onBlur={this.onBlur}
+            designMode={this.state.designMode}
+          />,
+          tA,
+        ].map((e, i) => e && formTable(e, i === 3 && fnCell))}
+        <Button
+          txt="Submit"
+          type="submit"
+          opt="submit"
+          disabled={designMode}
+          onClick={this.OnClick}
+        />
       </form>
     )
   }

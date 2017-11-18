@@ -1,17 +1,16 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import { LBL } from '../../utils/constants'
-import get from '../../utils/get'
+import { LBL } from '.././utils/constants'
 
 class EditLable extends PureComponent {
   static propTypes = {
     onBlur: PropTypes.func.isRequired,
     designMode: PropTypes.bool.isRequired,
     value: PropTypes.string.isRequired,
-    r: PropTypes.number.isRequired,
-    c: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
+    rw: PropTypes.number.isRequired,
+    clm: PropTypes.number.isRequired,
   }
 
   constructor(props) {
@@ -30,7 +29,7 @@ class EditLable extends PureComponent {
   }
 
   onChange(e) {
-    this.setState({ tempVal: get.ev(e) })
+    this.setState({ tempVal: e.target.value })
   }
 
   onBlur(e) {
@@ -65,8 +64,10 @@ class EditLable extends PureComponent {
   }
 
   render() {
-    const { designMode, name, r, c } = this.props
+    const { designMode, name, rw, clm } = this.props
+
     const { isEditing, tempVal } = this.state
+
     return isEditing && designMode ? (
       <input
         type="text"
@@ -76,8 +77,8 @@ class EditLable extends PureComponent {
         onKeyPress={this.onKeyPress}
         ref={input => input && input.focus()}
         name={name || 'grid'}
-        data-r={r}
-        data-c={c}
+        data-rw={rw}
+        data-clm={clm}
       />
     ) : (
       <div
