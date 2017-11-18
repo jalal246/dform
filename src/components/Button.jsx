@@ -13,7 +13,7 @@ class Button extends PureComponent {
   static defaultProps = {
     type: 'button',
     disabled: false,
-    name: 'btn',
+    name: null,
     dataOpt: null,
   }
   render() {
